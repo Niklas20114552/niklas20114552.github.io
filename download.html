@@ -15,7 +15,7 @@
     <header class="mdl-layout__header">
       <div class="mdl-layout__header-row">
         <!-- Title -->
-        <span class="mdl-layout-title"><a href="https://niklas20114552.github.io" style="text-decoration: none; color: white"><img src="https://niklas20114552.github.io/favicon.png" style="height: 64px; width: 64px;"></img>Arch Installer</a></span>
+        <span class="mdl-layout-title"><a href="https://arch-tui-installer.github.io" style="text-decoration: none; color: white"><img src="https://arch-tui-installer.github.io/favicon.png" style="height: 64px; width: 64px;"></img>Arch Installer</a></span>
         <!-- Add spacer, to align navigation to the right -->
         <div class="mdl-layout-spacer"></div>
         <!-- Navigation. We hide it in small screens. -->
@@ -29,7 +29,7 @@
       </div>
     </header>
     <div class="mdl-layout__drawer mdl-layout--small-screen-only">
-    <span class="mdl-layout-title"><a href="https://niklas20114552.github.io" style="text-decoration: none"><img src="https://niklas20114552.github.io/favicon.png" style="height: 64px; width: 64px;"></img>Arch Installer</span>
+    <span class="mdl-layout-title"><a href="https://arch-tui-installer.github.io" style="text-decoration: none"><img src="https://arch-tui-installer.github.io/favicon.png" style="height: 64px; width: 64px;"></img>Arch Installer</span>
     <nav class="mdl-navigation">
 	    <a class="mdl-navigation__link" href="download.html">Download</a>
 	    <a class="mdl-navigation__link" href="features.html">Features</a>
@@ -42,15 +42,17 @@
 		<a style="text-align: center" href="https://github.com/Niklas20114552/arch-tui-installer/releases/latest/download/archlinux-tui-setup.iso"><button class="mdl-button mdl-js-button mdl-button--raised">
 		  Download latest ISO
 		</button></a><p><br></p>
-		<a target="_blank" style="text-align: center" href="https://github.com/Niklas20114552/arch-tui-installer/blob/main/isoinstall.md#installation"><button class="mdl-button mdl-js-button mdl-button--raised">
-		  Installation instructions
-		</button></a><p><br></p>
-		<a target="_blank" style="text-align: center" href="https://github.com/Niklas20114552/arch-tui-installer/blob/main/manual.md#manual-installing"><button class="mdl-button mdl-js-button mdl-button--raised">
-		  Manual Installing
-		</button></a><p><br></p>
-		<a target="_blank" style="text-align: center" href="https://github.com/Niklas20114552/arch-tui-installer/blob/main/desktopinstall.md#installing-desktops"><button class="mdl-button mdl-js-button mdl-button--raised">
-		  Installing desktops
-		</button></a>
+    <div style="text-align: center;">
+      <p style="font-size: 18px"><strong>How to install Archlinux</strong></p>
+      <p>First download the ISO with the Button above.</p>
+      <p>To Install Archlinux with Arch Installer(arch-tui-installer), you must first create an Installation Media.<br>You can use <a href="https://rufus.ie">Rufus</a>(Windows), <a href="https://www.balena.io/etcher">BalenaEtcher</a>(Windows, macOS and Linux), attach the ISO to the Virtual Machine or<br>copy the ISO to an <a href="https://ventoy.net">Ventoy drive</a>(Works with every PC. Requires Installer for Windows, macOS or Linux).</p>
+      <p>After you have started the Computer/VM with the Installation Media, you must connect to the Internet. <br>When you are using Ethernet with DHCP you can skip this Step. Use the Utility nmtui to connect to your Wifi.</p>
+      <p>Then run the Command setup to start the Setup.</p>
+      <p><a href="https://github.com/Niklas20114552/arch-tui-installer/wiki/Installation-guide">A more Detailed Guide with Pictures can be found here</a></p>
+      <p style="font-size: 18px"><strong>How to install a Desktop</strong></p>
+      <p>This Tutorial requires an installed Archlinux with the Tutorial above.<br>If you used the full-installation mode or the 2steps-installation mode, you had to choose a desktop during the installation.</p>
+      <p>Use the command installer to install a desktop.<br>You can choose between Xfce4, Cinnamon, GNOME, KDE-Plasma, Deepin, MATE, Trinity, LXQt and LXDE.</p>
+      <p></p>
       </div>
     </main>
   </div>
