@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Niklas20114552 on GitHub</title>
+    <style>
+        body {
+            background-color: white;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .taskbar {
+            width: 100%;
+            background-color: rgba(250, 250, 250, 0.6);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            padding-left: 4px;
+            padding-right: 4px;
+        }
+        .square {
+            height: 17px;
+            width: 17px;
+            background-color: #000000;
+            border-radius: 2px;
+        }
+        .square-container {
+            display: flex;
+            align-items: center;
+        }
+        .startbutton {
+            padding: 3px;
+            background-color: rgba(255, 255, 255, 0);
+            -webkit-transition: background-color 100ms linear;
+            -ms-transition: background-color 100ms linear;
+            transition: background-color 100ms linear;
+        }
+        .startbutton:hover {
+            background-color: rgba(160, 160, 160, 40);
+            -webkit-transition: background-color 100ms linear;
+            -ms-transition: background-color 100ms linear;
+            transition: background-color 100ms linear;
+        }
+        .startbutton:active {
+            background-color: rgba(255, 255, 255, 100);
+            -webkit-transition: background-color 50ms linear;
+            -ms-transition: background-color 50ms linear;
+            transition: background-color 50ms linear;
+        }
+        .rightbar {
+            margin-left: auto;
+            margin-right: 5px;
+        }
+        .clock {
+            text-align: center;
+            line-height: 0.1;
+        }
+        .windowtitle {
+            width: 100%;
+            background-color: gray;
+            top: 0;
+            left: 0;
+            height: 30px;
+            display: flex;
+            align-items: center;
+        }
+        .windowtitle > img {
+            width: 30px;
+            height: 30px;
+        }
+        .windowtitle > p {
+            color: white;
+        }
+        .rightbars {
+            margin-left: auto;
+        }
+        .cOpenebutton {
+            height: 30px;
+            width: 30px;
+            background-color: gray;
+            border-radius: 2px;
+            font-size: 26px;
+            display: flex;
+            align-items: center;
+            -webkit-transition: background-color 50ms linear;
+            -ms-transition: background-color 50ms linear;
+            transition: background-color 50ms linear;
+            color: black;
+            text-decoration: none;
+        }
+        .cOpenebutton:hover {
+            background-color: darkred;
+            -webkit-transition: background-color 50ms linear;
+            -ms-transition: background-color 50ms linear;
+            transition: background-color 50ms linear;
+        }
+        .floatingborder {
+            background-color: rgba(180, 180, 180, 0.9);
+            width: 100%;
+        }
+        .floatingbutton {
+            border: 2px;
+            border-style: solid;
+            border-color: darkgray;
+            border-radius: 4px;
+            background-color: rgb(190, 190, 190);
+            height: 40px;
+            font-size: 22px;
+            display: flex;
+            vertical-align: middle;
+            text-align: center;
+            -webkit-transition: background-color 50ms linear;
+            -ms-transition: background-color 50ms linear;
+            transition: background-color 50ms linear;
+            cursor: pointer;
+        }
+        .floatingbutton:hover {
+            border: 2px;
+            border-style: solid;
+            border-color: gray;
+            border-radius: 4px;
+            background-color: rgb(150, 150, 150);
+            height: 40px;
+            font-size: 22px;
+            display: flex;
+            vertical-align: middle;
+            text-align: center;
+            -webkit-transition: background-color 50ms linear;
+            -ms-transition: background-color 50ms linear;
+            transition: background-color 50ms linear;
+        }
+        .floatingbar {
+            border: 2px;
+            border-style: solid;
+            border-color: darkgray;
+            border-radius: 4px;
+            background-color: rgb(210, 210, 210);
+            height: 40px;
+            font-size: 17px;
+            display: flex;
+            vertical-align: middle;
+            text-align: left;
+            padding-left: 5px;
+            cursor: text
+        }
+        .taskbaritem {
+            border-left: 3px rgb(52, 52, 52) solid;
+            border-radius: 3px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            font-size: 16pt;
+            padding-left: 1px;
+            cursor: pointer;
+            -webkit-transition: background-color 50ms linear;
+            -ms-transition: background-color 50ms linear;
+            transition: background-color 50ms linear;
+        }
+        .taskbaritem:hover {
+            background-color: rgba(160, 160, 160, 40);
+            -webkit-transition: background-color 100ms linear;
+            -ms-transition: background-color 100ms linear;
+            transition: background-color 100ms linear;
+        }
+        .taskbaritem:active {
+            background-color: rgba(230, 230, 230, 50);
+            -webkit-transition: background-color 50ms linear;
+            -ms-transition: background-color 50ms linear;
+            transition: background-color 50ms linear;
+        }
+        .taskbaritem > img {
+            height: 36px;
+            width: 36px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="windowtitle">
+        <img src="web.png">
+        <div class="middlebar">
+            <p style="color: white;" id="windowtitletext">More Infos about Brapy - Browser</p>
+        </div>
+        <div class="rightbars">
+            <a href="/" style="text-decoration: none;"><div class="cOpenebutton"><p style="line-height: 0; margin: auto;">x</p></div></a>
+        </div>
+    </div>
+    <div class="floatingborder" style="display: table;">
+        <div style="display: table-cell;" class="floatingbutton">←&nbsp;Back</div>
+        <div style="display: table-cell;" class="floatingbutton">Next&nbsp;→</div>
+        <div style="display: table-cell;" class="floatingbutton">Reload</div>
+        <div style="display: table-cell; width: 100%" class="floatingbar">https://brapy-browser.com (← not real duh)</div>
+        <div style="display: table-cell;" class="floatingbutton">Open&nbsp;→</div>
+    </div>
+    <div>
+        <p style="text-align: center;"><img src="/brapy.png" style="height: 64px; width: 64px;"></p>
+        <p style="text-align: center; font-size: 20pt; color: darkcyan; line-height: 0.2;">Brapy Web Browser...</p>
+        <p style="text-align: center; font-size: 14pt; line-height: 0.2;">...is a simple Qt5 Python based Webbrowser.</p>
+        <br>
+        <p style="font-size: 14pt; text-align: center;">But why should I use Brapy?</p>
+        <p style="text-align: center; font-size: 13pt;">- Build-In Adblocker<br>- Sleek Design<br>- Simplicity<br>- No Build-In Telemetry and Spyware<br>- It's Opensource Software<br>- Completly Free<br>- Userfriendly<br>- Ability to replace Official Socialmedia Pages with Privacy focused Alternatives</p>
+    </div>
+    <div class="taskbar">
+        <div class="startbutton">
+            <div class="square-container">
+                <div class="square" style="margin-bottom: 1px; margin-right: 1px;"></div>
+                <div class="square" style="margin-bottom: 1px; margin-left: 1px;"></div>
+            </div>
+            <div class="square-container">
+                <div class="square" style="margin-top: 1px; margin-right: 1px;"></div>
+                <div class="square" style="margin-top: 1px; margin-left: 1px;"></div>
+            </div>
+        </div>
+        <div class="taskbaritem" id="explorertask">
+            <img src="web.png">
+            <p>More Infos about Brapy - Browser</p>
+        </div>
+        <div class="rightbar">
+            <div class="clock">
+                <p style="font-size: 18px;" id="task-clock-time"></p>
+                <p style="font-size: 14px;" id="task-clock-date"></p>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function minTwoDigits(n) {return (n < 10 ? '0' : '') + n;}
+
+    function updateClock() {
+        const d = new Date();
+        const hours = d.getHours();
+        const minutes = minTwoDigits(d.getMinutes());
+        const time = `${hours}:${minutes}`;
+    
+        const month = minTwoDigits(d.getMonth() + 1);
+        const day = minTwoDigits(d.getDate());
+        const year = d.getFullYear();
+
+        const date = `${day}.${month}.${year}`;
+        document.getElementById('task-clock-time').innerText = time;
+        document.getElementById('task-clock-date').innerText = date;
+
+        requestAnimationFrame(updateClock);
+    }
+
+    updateClock();
+</script>
+</html>

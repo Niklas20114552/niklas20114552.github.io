@@ -1,71 +1,391 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-  <!-- Material Design Lite -->
-  <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-  <title>Arch TUI Installer</title>
-  <!-- Material Design icon font -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <style>
-	.container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Niklas20114552 on GitHub</title>
+    <style>
+        body {
+            background-image: url('wallpaper.png');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .taskbar {
+            width: 100%;
+            background-color: rgba(250, 250, 250, 0.6);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            padding-left: 4px;
+            padding-right: 4px;
+        }
+        .square {
+            height: 17px;
+            width: 17px;
+            background-color: #000000;
+            border-radius: 2px;
+        }
+        .square-container {
+            display: flex;
+            align-items: center;
+        }
+        .startbutton {
+            padding: 3px;
+            background-color: rgba(255, 255, 255, 0);
+            -webkit-transition: background-color 100ms linear;
+            -ms-transition: background-color 100ms linear;
+            transition: background-color 100ms linear;
+        }
+        .startbutton:hover {
+            background-color: rgba(160, 160, 160, 40);
+            -webkit-transition: background-color 100ms linear;
+            -ms-transition: background-color 100ms linear;
+            transition: background-color 100ms linear;
+        }
+        .startbutton:active {
+            background-color: rgba(255, 255, 255, 100);
+            -webkit-transition: background-color 50ms linear;
+            -ms-transition: background-color 50ms linear;
+            transition: background-color 50ms linear;
+        }
+        .rightbar {
+            margin-left: auto;
+            margin-right: 5px;
+        }
+        .clock {
+            text-align: center;
+            line-height: 0.1;
+            cursor: pointer;
+        }
+        .desktopiconclass {
+            padding: 5px;
+            color: white;
+            text-shadow: 2 gray;
+            line-height: 0.2;
+            -webkit-transition: background-color 50ms linear;
+            -ms-transition: background-color 50ms linear;
+            transition: background-color 50ms linear;
+        }
+        .desktopiconclass > p {
+            text-align: center;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .desktopiconclass > img {
+            text-align: center;
+            width: 96px;
+            height: 96px;
+        }
+        .desktopiconclass:hover {
+            background-color: rgba(40, 198, 226, 0.4);
+            border: 2px;
+            padding: 3px;
+            border-color: rgba(24, 196, 226, 0.2);
+            border-style: solid;
+            border-radius: 2px;
+            -webkit-transition: background-color 50ms linear;
+            -ms-transition: background-color 50ms linear;
+            transition: background-color 50ms linear;
+        }
+        .desktopiconclass:active {
+            background-color: rgba(40, 198, 226, 0.6);
+            border: 2px;
+            padding: 3px;
+            border-color: rgba(24, 196, 226, 0.4);
+            border-style: solid;
+            border-radius: 2px;
+            -webkit-transition: background-color 50ms linear;
+            -ms-transition: background-color 50ms linear;
+            transition: background-color 50ms linear;
+        }
+        .foldericonclass {
+            padding: 5px;
+            width: min-content;
+            color: white;
+            text-shadow: 2 gray;
+            line-height: 1;
+            -webkit-transition: background-color 50ms linear;
+            -ms-transition: background-color 50ms linear;
+            transition: background-color 50ms linear;
+        }
+        .foldericonclass > p {
+            text-align: center;
+            font-size: 14px;
+            text-decoration: none;
+        }
+        .foldericonclass > img {
+            text-align: center;
+            width: 96px;
+            height: 96px;
+        }
+        .foldericonclass:hover {
+            background-color: rgba(40, 198, 226, 0.4);
+            border: 2px;
+            padding: 3px;
+            border-color: rgba(24, 196, 226, 0.2);
+            border-style: solid;
+            border-radius: 2px;
+            -webkit-transition: background-color 50ms linear;
+            -ms-transition: background-color 50ms linear;
+            transition: background-color 50ms linear;
+        }
+        .foldericonclass:active {
+            background-color: rgba(40, 198, 226, 0.6);
+            border: 2px;
+            padding: 3px;
+            border-color: rgba(24, 196, 226, 0.4);
+            border-style: solid;
+            border-radius: 2px;
+            -webkit-transition: background-color 50ms linear;
+            -ms-transition: background-color 50ms linear;
+            transition: background-color 50ms linear;
+        }
+        .floatingwindow {
+            position: fixed;
+            height: 70%;
+            width: 85%;
+            background-color: rgba(200, 200, 200, 0.9);
+            margin: auto;
+            top: 6%;
+            left: 6%;
+            border: 5px;
+            border-style: solid;
+            border-radius: 8px;
+            border-color: rgba(180, 180, 180, 0.9);
+            visibility: hidden;
+        }
+        .floatingtitle {
+            width: 100%;
+            background-color: gray;
+            height: 30px;
+            display: flex;
+            align-items: center;
+        }
+        .floatingtitle > img {
+            width: 30px;
+            height: 30px;
+        }
+        .floatingtitle > p {
+            color: white;
+        }
+        .floatingright {
+            margin-left: auto;
+        }
+        .closebutton {
+            height: 30px;
+            width: 30px;
+            background-color: gray;
+            border-radius: 2px;
+            font-size: 26px;
+            display: flex;
+            align-items: center;
+            -webkit-transition: background-color 50ms linear;
+            -ms-transition: background-color 50ms linear;
+            transition: background-color 50ms linear;
+            color: black;
+            text-decoration: none;
+        }
+        .closebutton:hover {
+            background-color: darkred;
+            -webkit-transition: background-color 50ms linear;
+            -ms-transition: background-color 50ms linear;
+            transition: background-color 50ms linear;
+        }
+        .floatingborder {
+            background-color: rgba(180, 180, 180, 0.9);
+            width: 100%;
+        }
+        .floatingbutton {
+            border: 2px;
+            border-style: solid;
+            border-color: darkgray;
+            border-radius: 4px;
+            background-color: rgb(190, 190, 190);
+            height: 40px;
+            font-size: 22px;
+            display: flex;
+            vertical-align: middle;
+            text-align: center;
+            -webkit-transition: background-color 50ms linear;
+            -ms-transition: background-color 50ms linear;
+            transition: background-color 50ms linear;
+            cursor: pointer;
+        }
+        .floatingbutton:hover {
+            border: 2px;
+            border-style: solid;
+            border-color: gray;
+            border-radius: 4px;
+            background-color: rgb(150, 150, 150);
+            height: 40px;
+            font-size: 22px;
+            display: flex;
+            vertical-align: middle;
+            text-align: center;
+            -webkit-transition: background-color 50ms linear;
+            -ms-transition: background-color 50ms linear;
+            transition: background-color 50ms linear;
+        }
+        .floatingbar {
+            border: 2px;
+            border-style: solid;
+            border-color: darkgray;
+            border-radius: 4px;
+            background-color: rgb(210, 210, 210);
+            height: 40px;
+            font-size: 17px;
+            display: flex;
+            vertical-align: middle;
+            text-align: left;
+            padding-left: 5px;
+            cursor: text
+        }
+        .taskbaritem {
+            border-left: 3px rgb(52, 52, 52) solid;
+            border-radius: 3px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            font-size: 16pt;
+            padding-left: 1px;
+            visibility: hidden;
+            cursor: pointer;
+            -webkit-transition: background-color 50ms linear;
+            -ms-transition: background-color 50ms linear;
+            transition: background-color 50ms linear;
+        }
+        .taskbaritem:hover {
+            background-color: rgba(160, 160, 160, 40);
+            -webkit-transition: background-color 100ms linear;
+            -ms-transition: background-color 100ms linear;
+            transition: background-color 100ms linear;
+        }
+        .taskbaritem:active {
+            background-color: rgba(230, 230, 230, 50);
+            -webkit-transition: background-color 50ms linear;
+            -ms-transition: background-color 50ms linear;
+            transition: background-color 50ms linear;
+        }
+        .taskbaritem > img {
+            height: 36px;
+            width: 36px;
+        }
+    </style>
 </head>
 
 <body>
-  <!-- Always shows a header, even in smaller screens. -->
-  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <header class="mdl-layout__header">
-      <div class="mdl-layout__header-row">
-        <!-- Title -->
-	<span class="mdl-layout-title"><a href="https://arch-tui-installer.github.io" style="text-decoration: none; color: white"><img src="https://arch-tui-installer.github.io/favicon.png" style="height: 64px; width: 64px;"></img>Arch Installer</a></span>
-        <!-- Add spacer, to align navigation to the right -->
-        <div class="mdl-layout-spacer"></div>
-        <!-- Navigation. We hide it in small screens. -->
-        <nav class="mdl-navigation mdl-layout--large-screen-only">
-          <a class="mdl-navigation__link" href="download.html">Download</a>
-          <a class="mdl-navigation__link" href="features.html">Features</a>
-          <a target="_blank" class="mdl-navigation__link" href="https://github.com/Niklas20114552/arch-tui-installer">Github</a>
-          <a target="_blank" class="mdl-navigation__link" href="https://github.com/Niklas20114552/arch-tui-installer/wiki">Documentation</a>
-          <a target="_blank" class="mdl-navigation__link" href="https://archlinux.org">Archlinux</a>
-        </nav>
-      </div>
-    </header>
-    <div class="mdl-layout__drawer mdl-layout--small-screen-only">
-    <span class="mdl-layout-title"><a href="https://arch-tui-installer.github.io" style="text-decoration: none"><img src="https://arch-tui-installer.github.io/favicon.png" style="height: 64px; width: 64px;"></img>Arch Installer</span>
-    <nav class="mdl-navigation">
-	    <a class="mdl-navigation__link" href="download.html">Download</a>
-	    <a class="mdl-navigation__link" href="features.html">Features</a>
-	    <a target="_blank" class="mdl-navigation__link" href="https://github.com/Niklas20114552/arch-tui-installer">Github</a>
-	    <a target="_blank" class="mdl-navigation__link" href="https://github.com/Niklas20114552/arch-tui-installer/wiki">Documentation</a>
-	    <a target="_blank" class="mdl-navigation__link" href="https://archlinux.org">Archlinux</a>
-    </nav>
-  </div>
-		<div style="text-align: center;">
-		<br><br>
-		<p style="font-size: 30pt; font-family: Noto Sans; line-height:1 ">Arch Installer</p>
-		<p id="test1" style="font-size: 40pt; font-family: Noto Sans; line-height: 1"></p>
-		<a style="text-align: center" href="features.html"><button class="mdl-button mdl-js-button mdl-button--raised">
-		  Read More
-		</button></a>
-		<a style="text-align: center" href="download.html"><button class="mdl-button mdl-js-button mdl-button--raised">
-		  Try out now!
-		</button></a>
-		</div>
-    </main>
-  </div>
+    <div>
+        <a href="https://github.com/Niklas20114552" target="_blank"><div class="desktopiconclass" style="position: fixed; top: 5px; left: 25px;">
+            <img src="github.png"><br>
+            <p>Github</p>
+        </div></a>
+        <a style="cursor: pointer;" onclick="showFloating()"><div class="desktopiconclass" style="position: fixed; top: 200px; left: 100px;">
+            <img src="folder.png"><br>
+            <p>Projects</p>
+        </div></a>
+    </div>
+    <div class="taskbar">
+        <div class="startbutton">
+            <div class="square-container">
+                <div class="square" style="margin-bottom: 1px; margin-right: 1px;"></div>
+                <div class="square" style="margin-bottom: 1px; margin-left: 1px;"></div>
+            </div>
+            <div class="square-container">
+                <div class="square" style="margin-top: 1px; margin-right: 1px;"></div>
+                <div class="square" style="margin-top: 1px; margin-left: 1px;"></div>
+            </div>
+        </div>
+        <div class="taskbaritem" id="explorertask">
+            <img src="folder.png">
+            <p>Projects - Explorer</p>
+        </div>
+        <div class="rightbar">
+            <div class="clock">
+                <p style="font-size: 18px;" id="task-clock-time"></p>
+                <p style="font-size: 14px;" id="task-clock-date"></p>
+            </div>
+        </div>
+    </div>
+    <div class="floatingwindow" id="exploringprojects" style="background-color: rgba(230, 230, 230, 0.8);">
+        <div class="floatingtitle">
+            <img src="folder.png">
+            &nbsp;<p style="color: white;" id="windowtitletext">Projects - Explorer</p>
+            <div class="floatingright">
+                <a onclick="hideFloating()" style="text-decoration: none; cursor: pointer;"><div class="closebutton"><p style="line-height: 0; margin: auto;">x</p></div></a>
+            </div>
+        </div>
+        <div class="floatingborder" style="display: table;">
+            <div style="display: table-cell;" class="floatingbutton">←&nbsp;Back</div>
+            <div style="display: table-cell;" class="floatingbutton">Next&nbsp;→</div>
+            <div style="display: table-cell; width: 100%" class="floatingbar">User / Desktop / Projects</div>
+            <div style="display: table-cell;" class="floatingbutton">Open&nbsp;→</div>
+        </div>
+        <div class="square-container">
+        <a href="/brapy.html" style="text-decoration: none;"><div class="foldericonclass">
+            <img src="brapy.png"><br>
+            <p style="text-decoration: none; color: black;">Brapy</p>
+        </div></a>
+        <a href="https://github.com/Niklas20114552/brapy" target="_blank" style="text-decoration: none;"><div class="foldericonclass">
+            <img src="github.png"><br>
+            <p style="text-decoration: none; color: black;">Brapy On GitHub</p>
+        </div></a>
+        <a href="https://github.com/Niklas20114552/brapy/releases/latest" target="_blank" style="text-decoration: none;"><div class="foldericonclass">
+            <img src="brapy_setup.png"><br>
+            <p style="text-decoration: none; color: black;">Download Brapy</p>
+        </div></a>
+        </div>
+        <div class="square-container">
+        <a href="https://arch-tui-installer.github.io" target="_blank" style="text-decoration: none;"><div class="foldericonclass">
+            <img src="arch.png"><br>
+            <p style="text-decoration: none; color: black;">Arch TUI Installer</p>
+        </div></a>
+        <a href="https://github.com/Niklas20114552/arch-tui-installer" target="_blank" style="text-decoration: none;"><div class="foldericonclass">
+            <img src="github.png"><br>
+            <p style="text-decoration: none; color: black;">Arch TUI Installer on Github</p>
+        </div></a>
+        <a href="https://github.com/Niklas20114552/arch-tui-installer/releases/latest" target="_blank" style="text-decoration: none;"><div class="foldericonclass">
+            <img src="arch-tui-installer.png"><br>
+            <p style="text-decoration: none; color: black;">Download Arch TUI Installer</p>
+        </div></a>
+        </div>
+    </div>
 </body>
-  <script>
-	(function newFact() {
-	  var elem1 = ["We don't make an Operating System for you. You make it and we'll help you!", "Your Operating System can be anything", "Just another Arch-Distro, but it is made for you!", "One Operating System. Many customizations ways.", "Did you know that this Text can change?", "Installing Archlinux is easy, with Arch Installer.", "just got even better!", "Made with ♥️ and Bash", "that's everything i have to say", "Now on Github!", "A just for fun project", "WoRkS pErFeCtLy!"];
-	  var random1 = Math.floor(Math.random() * elem1.length);
-	  document.getElementById('test1').innerHTML = elem1[random1];
-	})();
-  </script>
+<script>
+    function showFloating() {
+        document.getElementById('exploringprojects').style.visibility = 'visible'
+        document.getElementById('explorertask').style.visibility = 'visible';
+
+    }
+    function hideFloating() {
+        document.getElementById('exploringprojects').style.visibility = 'hidden'
+        document.getElementById('explorertask').style.visibility = 'hidden';
+    }
+    function minTwoDigits(n) {return (n < 10 ? '0' : '') + n;}
+
+    function updateClock() {
+        const d = new Date();
+        const hours = d.getHours();
+        const minutes = minTwoDigits(d.getMinutes());
+        const time = `${hours}:${minutes}`;
+    
+        const month = minTwoDigits(d.getMonth() + 1);
+        const day = minTwoDigits(d.getDate());
+        const year = d.getFullYear();
+
+        const date = `${day}.${month}.${year}`;
+        document.getElementById('task-clock-time').innerText = time;
+        document.getElementById('task-clock-date').innerText = date;
+
+        requestAnimationFrame(updateClock);
+    }
+
+    updateClock();
+</script>
 </html>
