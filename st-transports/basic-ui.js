@@ -5,9 +5,20 @@ const personbox = document.getElementById('personbox');
 
 let start = '';
 let destination = '';
+let routes = '';
 
 if (localStorage.getItem('persons') == null || localStorage.getItem('persons') == '[]') {
     localStorage.setItem('persons', '[1]');
+}
+
+if (localStorage.getItem('start')) {
+    start = localStorage.getItem('start');
+    rebuildStart();
+}
+
+if (localStorage.getItem('destination')) {
+    destination = localStorage.getItem('destination');
+    rebuildStop();
 }
 // 1 → Adult (No Seacard)
 // 2 → Adult (Seacard)
@@ -87,10 +98,12 @@ document.getElementById('dialoginput').addEventListener('input', function () {
         dialogbox.style.display = 'none';
         if (dialogtitle.innerText == 'Select the Destination') {
             destination = this.value;
+            localStorage.setItem('destination', destination);
             rebuildStop();
         }
         else if (dialogtitle.innerText == 'Select the Start') {
             start = this.value;
+            localStorage.setItem('start', start);
             rebuildStart();
         }
         this.value = '';
@@ -116,20 +129,41 @@ document.getElementById('personback').addEventListener('click', () => {
     personbox.style.display = 'none';
 });
 
+document.getElementById('route-button').addEventListener('click', () => {
+    routes = findRoutes(network, start, destination);
+    buildRoutes();
+});
+
+document.getElementById('swap').addEventListener('click', () => {
+    const temp = start;
+    start = destination;
+    destination = temp;
+    rebuildStart();
+    rebuildStop();
+});
+
 function rebuildStart() {
     document.getElementById('start-selector').innerHTML = '';
     startsvg = document.createElement('img');
     startsvg.src = 'start.svg';
-    document.getElementById('start-selector').appendChild(startsvg)
-    document.getElementById('start-selector').innerHTML += start;
+    document.getElementById('start-selector').appendChild(startsvg);
+    if (start == '') {
+        document.getElementById('start-selector').innerHTML += 'Start';
+    } else {
+        document.getElementById('start-selector').innerHTML += start;
+    }
 }
 
 function rebuildStop() {
     document.getElementById('stop-selector').innerHTML = '';
     stopsvg = document.createElement('img');
     stopsvg.src = 'destination.svg';
-    document.getElementById('stop-selector').appendChild(stopsvg)
-    document.getElementById('stop-selector').innerHTML += destination;
+    document.getElementById('stop-selector').appendChild(stopsvg);
+    if (destination == '') {
+        document.getElementById('stop-selector').innerHTML += 'Destination';
+    } else {
+        document.getElementById('stop-selector').innerHTML += destination;
+    }
 }
 
 function rebuildPersons() {
@@ -145,5 +179,57 @@ function rebuildPersons() {
     }
     optionSelector.appendChild(personsvg);
     optionSelector.innerHTML += personstring;
-};
+}
+
+function secondStringify(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    let minstring;
+    if (mins == 1) {
+        minstring = '1 minute';
+    } else {
+        minstring = mins + ' minutes';
+    }
+    if (secs > 0) {
+        if (secs == 1) {
+            return minstring + ' 1 second';
+        } else {
+            return minstring + ' ' + secs + ' seconds';
+        }
+    } else {
+        return minstring; 
+    }
+}
+
+function buildRoutes() {
+    document.querySelector('main').innerHTML = '';
+    for (var i = 0; i < routes.length; i++) {
+        const routebox = document.createElement('routebox');
+
+        const title = document.createElement('span');
+        title.classList.add('routetitle');
+        
+        const flexbox = document.createElement('div');
+        flexbox.classList.add('flexbox');
+        
+        let totaltraveltime = 0;
+        
+        for (var j = 0; j < routes[i].length; j++) {
+            totaltraveltime += getTravelTimeForStops(getStops(routes[i][j].stations[0], routes[i][j].stations[1], routes[i][j].line));
+        }
+        
+        for (var j = 0; j < routes[i].length; j++) {
+            const linebox = document.createElement('linebox');
+            linebox.style.width = (getTravelTimeForStops(getStops(routes[i][j].stations[0], routes[i][j].stations[1], routes[i][j].line)) / totaltraveltime * 100) + '%';
+            linebox.innerText = routes[i][j].line.replace('UST', 'UltraStar');
+            flexbox.appendChild(linebox);
+        }
+        
+        title.innerText = secondStringify(totaltraveltime);
+        routebox.appendChild(title);
+        routebox.appendChild(flexbox);
+        document.querySelector('main').appendChild(routebox);
+    }
+}
+
 rebuildPersons();

@@ -15,6 +15,7 @@ button {
     -webkit-transition: background-color 100ms linear;
     -ms-transition: background-color 100ms linear;
     transition: background-color 100ms linear;
+    cursor: pointer;
 }
 
 td>button {
@@ -86,7 +87,8 @@ dialogbox>button {
     font-size: 16pt;
 }
 
-input[type=text],select {
+input[type=text],
+select {
     width: 20vw;
     text-align: left;
     display: flex;
@@ -101,17 +103,15 @@ input[type=text],select {
 sidebar {
     width: 206px;
     position: absolute;
-    top: 0;
     left: 0;
 }
 
 main {
-    position: absolute;
-    top: 0;
-    left: 206px;
+    margin-left: 206px;
     width: calc(100vw - 206px);
-    height: 100vh;
+    height: 98vh;
     background-color: rgb(230, 230, 230);
+    padding-top: 2vh;
 }
 
 .title {
@@ -133,4 +133,44 @@ travelerentry {
 travelerentry>button {
     margin-right: 1vw;
     border-bottom: none;
+}
+
+#swap {
+    width: fit-content;
+    height: 32px;
+}
+
+routebox {
+    margin-bottom: 1vh;
+    margin-left: auto;
+    margin-right: auto;
+    width: calc(90vw - 206px);
+    height: fit-content;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    padding: 0.5vh 1vw 0.5vh 1vw;
+    cursor: pointer;
+}
+
+routebox>.routetitle {
+    font-weight: bold;
+    font-size: 18pt;
+    margin-left: 0.5vw;
+}
+
+.flexbox {
+    display: flex;
+}
+
+linebox {
+    background-color: rgb(107, 0, 107);
+    color: white;
+    height: fit-content;
+    text-align: center;
+    font-weight: bold;
+    padding: 0.5vh 0 0.5vh 0;
+    margin: 0 0.5vw 0 0.5vw;
+    border-radius: 5px;
 }

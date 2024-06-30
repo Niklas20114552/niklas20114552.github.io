@@ -12,13 +12,15 @@
 
 <body>
     <sidebar>
-        <p class="title"><img src="logo.png">Seacrestica Transports</p>
+        <p class="title"><img src="logo.png" title="Seacrestica Transports logo">Seacrestica Transports</p>
         <table>
             <tr>
                 <td><button id="start-selector"><img src="start.svg">Start</button></td>
             </tr>
             <tr>
-                <td><button id="stop-selector"><img src="destination.svg">Destination</button></td>
+                <td style="display: flex;"><button id="stop-selector" style="width: 164px;">
+                    <img src="destination.svg">Destination</button><button id="swap"><img src="swap.svg"></button>
+                </td>
             </tr>
             <tr>
                 <td><button id="option-selector"></button></td>
@@ -29,7 +31,15 @@
         </table>
     </sidebar>
 
-    <main></main>
+    <main>
+        <!-- <routebox>
+            <span class="routetitle">5 minutes</span>
+            <div class="flexbox">
+                <linebox style="width: 70%;">UltraStar 2</linebox>
+                <linebox style="width: 30%;">UltraStar 4</linebox>
+            </div>
+        </routebox> -->
+    </main>
 
     <blackbox style="display: none;"></blackbox>
     <dialogbox style="display: none;" id="stationbox">
