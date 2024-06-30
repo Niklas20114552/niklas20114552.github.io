@@ -1,6 +1,7 @@
 body {
     font-family: Roboto, Arial, sans-serif;
     margin: 0;
+    background-color: rgb(230, 230, 230);
 }
 
 button {
@@ -78,13 +79,33 @@ dialogbox {
     border-radius: 10px;
 }
 
+#routebox {
+    text-align: left;
+    width: 90vw;
+    height: 90vh;
+    top: 4vh;
+    left: 4vw;
+    align-items: unset;
+}
+
 dialogbox>button {
     width: fit-content;
     margin-top: 1vh;
 }
 
-#dialogtitle {
+#dialogtitle,
+#routetitle {
     font-size: 16pt;
+}
+
+#routetitle {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+}
+
+#routetitle>button {
+    margin-right: 5px;
 }
 
 input[type=text],
@@ -102,16 +123,18 @@ select {
 
 sidebar {
     width: 206px;
-    position: absolute;
+    height: 100vh;
+    position: fixed;
     left: 0;
+    top: 0;
+    background-color: white;
 }
 
 main {
     margin-left: 206px;
-    width: calc(100vw - 206px);
+    width: calc(99vw - 206px);
     height: 98vh;
-    background-color: rgb(230, 230, 230);
-    padding-top: 2vh;
+    padding: 2vh 0 0 1vw;
 }
 
 .title {
@@ -141,7 +164,7 @@ travelerentry>button {
 }
 
 routebox {
-    margin-bottom: 1vh;
+    margin-top: 1vh;
     margin-left: auto;
     margin-right: auto;
     width: calc(90vw - 206px);
@@ -157,7 +180,7 @@ routebox {
 routebox>.routetitle {
     font-weight: bold;
     font-size: 18pt;
-    margin-left: 0.5vw;
+    margin-left: 0.2vw;
 }
 
 .flexbox {
@@ -171,6 +194,64 @@ linebox {
     text-align: center;
     font-weight: bold;
     padding: 0.5vh 0 0.5vh 0;
-    margin: 0 0.5vw 0 0.5vw;
+    margin: 0 0.2vw 0 0.2vw;
     border-radius: 5px;
+}
+
+.green-text {
+    color: green;
+}
+
+.pricetext {
+    font-size: 14pt;
+    margin-top: 5px;
+}
+
+.searchtitle {
+    font-weight: bold;
+    font-size: 18pt;
+}
+
+leftbox {
+    border-left: solid rgb(100, 100, 100) 4px;
+    padding-left: 4px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5vh;
+    margin-top: 1.5vh;
+}
+
+.stationtitle {
+    font-size: 14pt;
+    line-height: 0;
+}
+
+.traintitle {
+    font-size: 11pt;
+    background-color: rgb(80, 0, 80);
+    color: white;
+    width: fit-content;
+    padding: 0.2vh 0.2vw 0 0.2vw;
+    border-radius: 2px;
+    margin: 2vh 0 1vh 0;
+}
+
+.operator {
+    color: gray;
+    font-size: 10pt;
+}
+
+.changehere {
+    color: rgb(65, 65, 65);
+    font-size: 12pt;
+}
+
+.platform {
+    font-size: 14pt;
+    background-color: rgb(0, 64, 109);
+    color: white;
+    width: fit-content;
+    padding: 0.25vh 0.25vw 0.25vh 0.25vw;
+    border-radius: 2px;
+    margin-right: 0.75vw;
 }

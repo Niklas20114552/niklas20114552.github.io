@@ -2,6 +2,7 @@ const blackbox = document.querySelector('blackbox');
 const dialogbox = document.getElementById('stationbox');
 const dialogtitle = document.getElementById('dialogtitle');
 const personbox = document.getElementById('personbox');
+const routebox = document.getElementById('routebox');
 
 let start = '';
 let destination = '';
@@ -130,8 +131,12 @@ document.getElementById('personback').addEventListener('click', () => {
 });
 
 document.getElementById('route-button').addEventListener('click', () => {
-    routes = findRoutes(network, start, destination);
-    buildRoutes();
+    if (start != destination) {
+        routes = findRoutes(network, start, destination);
+        buildRoutes();
+    } else {
+        document.querySelector('main').innerText = 'Start and destination are identical.'
+    }
 });
 
 document.getElementById('swap').addEventListener('click', () => {
@@ -197,39 +202,130 @@ function secondStringify(seconds) {
             return minstring + ' ' + secs + ' seconds';
         }
     } else {
-        return minstring; 
+        return minstring;
     }
+}
+
+function calcPrice() {
+    let price = 0;
+    for (var i = 0; i < persons.length; i++) {
+        price += network['prices'][persons[i]];
+    }
+    return price;
 }
 
 function buildRoutes() {
     document.querySelector('main').innerHTML = '';
+    const searchtitle = document.createElement('span');
+    searchtitle.innerText = 'Search results for: ' + start + ' → ' + destination + ':';
+    searchtitle.classList.add('searchtitle')
+    document.querySelector('main').appendChild(searchtitle)
     for (var i = 0; i < routes.length; i++) {
         const routebox = document.createElement('routebox');
+        routebox.id = i;
 
         const title = document.createElement('span');
         title.classList.add('routetitle');
-        
+
         const flexbox = document.createElement('div');
         flexbox.classList.add('flexbox');
-        
+
         let totaltraveltime = 0;
-        
+
         for (var j = 0; j < routes[i].length; j++) {
             totaltraveltime += getTravelTimeForStops(getStops(routes[i][j].stations[0], routes[i][j].stations[1], routes[i][j].line));
         }
-        
+
         for (var j = 0; j < routes[i].length; j++) {
             const linebox = document.createElement('linebox');
             linebox.style.width = (getTravelTimeForStops(getStops(routes[i][j].stations[0], routes[i][j].stations[1], routes[i][j].line)) / totaltraveltime * 100) + '%';
             linebox.innerText = routes[i][j].line.replace('UST', 'UltraStar');
+            linebox.title = routes[i][j].stations[0] + ' → ' + routes[i][j].stations[1];
             flexbox.appendChild(linebox);
         }
-        
+
         title.innerText = secondStringify(totaltraveltime);
+
+        const pricespan = document.createElement('span');
+        pricespan.innerText = "Price: " + calcPrice() + ' ';
+        pricespan.classList.add('pricetext');
+        const greenspan = document.createElement('span');
+        greenspan.classList.add('green-text');
+        greenspan.innerHTML = 'Emeralds';
+        pricespan.appendChild(greenspan);
+
         routebox.appendChild(title);
         routebox.appendChild(flexbox);
+        routebox.appendChild(pricespan);
         document.querySelector('main').appendChild(routebox);
     }
+
+    const groutes = document.querySelectorAll('routebox');
+    for (var i = 0; i < groutes.length; i++) {
+        groutes[i].addEventListener('click', function () {
+            const route = routes[this.id];
+            const button = document.createElement('button');
+            button.innerText = 'Back';
+            button.id = 'routeback';
+            document.getElementById('routetitle').innerHTML = '';
+            document.getElementById('routetitle').appendChild(button);
+            document.getElementById('routetitle').innerHTML += 'Connection ' + start + ' → ' + destination + ':';
+            
+            document.querySelectorAll('leftbox').forEach(function (a) {a.remove()});
+            const changeheres = document.getElementsByClassName('changehere');
+            for (var c = 0; c < changeheres.length; c++) {
+                changeheres[c].delete();
+            }
+
+            for (var j = 0; j < route.length; j++) {
+                const leftbox = document.createElement('leftbox');
+
+                const startstation = document.createElement('p');
+                startstation.classList.add('stationtitle');
+                const platform = document.createElement('span');
+                platform.classList.add('platform');
+                platform.innerText = 'Platform ' + getPlatformOfStop(route[j].stations[0], route[j].line);
+                startstation.appendChild(platform);
+                startstation.innerHTML += route[j].stations[0];
+                leftbox.appendChild(startstation);
+
+                const train = document.createElement('span');
+                train.classList.add('traintitle');
+                train.innerText = route[j].line.replace('UST', 'UltraStar') + ' (' + route[j].line + ')';
+                leftbox.appendChild(train);
+
+                const operator = document.createElement('span');
+                operator.classList.add('operator');
+                operator.innerText = 'Operated by Seacrestica Transports Outpost.';
+                leftbox.appendChild(operator);
+
+                const stopstation = document.createElement('p');
+                stopstation.classList.add('stationtitle');
+                const stop_platform = document.createElement('span');
+                platform.classList.add('platform');
+                platform.innerText = 'Platform ' + getPlatformOfStop(route[j].stations[1], route[j].line);
+                stopstation.appendChild(platform);
+                stopstation.innerHTML += route[j].stations[1];
+                leftbox.appendChild(stopstation);
+
+                routebox.appendChild(leftbox);
+
+                if (j < route.length - 1) {
+                    const change = document.createElement('span');
+                    change.classList.add('changehere');
+                    change.innerText = 'Change train here';
+                    routebox.appendChild(change);
+                }
+            }
+            blackbox.style.display = 'block';
+            routebox.style.display = 'block';
+            document.getElementById('routeback').addEventListener('click', () => {
+                blackbox.style.display = 'none';
+                routebox.style.display = 'none';
+            });
+        });
+    }
+
 }
 
 rebuildPersons();
