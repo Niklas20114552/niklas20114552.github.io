@@ -131,11 +131,13 @@ document.getElementById('personback').addEventListener('click', () => {
 });
 
 document.getElementById('route-button').addEventListener('click', () => {
-    if (start != destination) {
+    if (start == '' || destination == '') {
+        document.querySelector('main').innerText = 'Please select a start and a destination.';
+    } else if (start != destination) {
         routes = findRoutes(network, start, destination);
         buildRoutes();
     } else {
-        document.querySelector('main').innerText = 'Start and destination are identical.'
+        document.querySelector('main').innerText = 'Start and destination are identical.';
     }
 });
 
@@ -294,6 +296,11 @@ function buildRoutes() {
                 train.innerText = route[j].line.replace('UST', 'UltraStar') + ' (' + route[j].line + ')';
                 leftbox.appendChild(train);
 
+                const time = document.createElement('p');
+                time.classList.add('stationtitle');
+                time.innerText = 'Travel time: ' + secondStringify(getTravelTimeForStops(getStops(route[j].stations[0], route[j].stations[1], route[j].line)));
+                leftbox.appendChild(time);
+
                 const operator = document.createElement('span');
                 operator.classList.add('operator');
                 operator.innerText = 'Operated by Seacrestica Transports Outpost.';
@@ -302,10 +309,10 @@ function buildRoutes() {
                 const stopstation = document.createElement('p');
                 stopstation.classList.add('stationtitle');
                 const stop_platform = document.createElement('span');
-                platform.classList.add('platform');
-                platform.innerText = 'Platform ' + getPlatformOfStop(route[j].stations[1], route[j].line);
-                stopstation.appendChild(platform);
-                stopstation.innerHTML += route[j].stations[1];
+                stop_platform.classList.add('platform');
+                stop_platform.innerText = 'Platform ' + getPlatformOfStop(route[j].stations[1], route[j].line);
+                stopstation.appendChild(stop_platform);
+                stopstation.innerHTML += route[j].stations[0];
                 leftbox.appendChild(stopstation);
 
                 routebox.appendChild(leftbox);
