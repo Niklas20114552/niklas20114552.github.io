@@ -1,0 +1,136 @@
+body {
+    font-family: Roboto, Arial, sans-serif;
+    margin: 0;
+}
+
+button {
+    text-align: left;
+    display: flex;
+    align-items: center;
+    font-size: 14pt;
+    line-height: 1.5;
+    background-color: rgb(220, 220, 220);
+    border: none;
+    border-bottom: solid 2px rgb(140, 143, 145);
+    -webkit-transition: background-color 100ms linear;
+    -ms-transition: background-color 100ms linear;
+    transition: background-color 100ms linear;
+}
+
+td>button {
+    width: 200px;
+}
+
+button:hover {
+    background-color: rgb(232, 232, 232);
+    -webkit-transition: background-color 100ms linear;
+    -ms-transition: background-color 100ms linear;
+    transition: background-color 100ms linear;
+}
+
+button:active {
+    background-color: rgb(240, 240, 240);
+    -webkit-transition: background-color 100ms linear;
+    -ms-transition: background-color 100ms linear;
+    transition: background-color 100ms linear;
+}
+
+button:disabled {
+    background-color: rgb(150, 150, 150);
+}
+
+blackbox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #000000AA;
+    width: 100vw;
+    height: 100vh;
+}
+
+#stationbox {
+    /* Padding nicht vergessen! */
+    width: 20vw;
+    height: 15vh;
+    top: 42.5vh;
+    left: 39vw;
+}
+
+#personbox {
+    width: 20vw;
+    height: 35vh;
+    top: 32vh;
+    left: 39vw;
+}
+
+#personadd {
+    margin-top: auto;
+}
+
+dialogbox {
+    position: absolute;
+    background-color: white;
+    padding: 1vh 1vw 1vh 1vw;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+}
+
+dialogbox>button {
+    width: fit-content;
+    margin-top: 1vh;
+}
+
+#dialogtitle {
+    font-size: 16pt;
+}
+
+input[type=text],select {
+    width: 20vw;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    font-size: 14pt;
+    line-height: 1.5;
+    background-color: rgb(220, 220, 220);
+    border: none;
+    border-bottom: solid 2px rgb(140, 143, 145);
+}
+
+sidebar {
+    width: 206px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+main {
+    position: absolute;
+    top: 0;
+    left: 206px;
+    width: calc(100vw - 206px);
+    height: 100vh;
+    background-color: rgb(230, 230, 230);
+}
+
+.title {
+    font-size: 18pt;
+    text-align: center;
+}
+
+#stop-selector,
+#option-selector {
+    margin-bottom: 1.5vh;
+}
+
+travelerentry {
+    display: flex;
+    align-items: center;
+    border-bottom: solid 2px rgb(140, 143, 145);
+}
+
+travelerentry>button {
+    margin-right: 1vw;
+    border-bottom: none;
+}
