@@ -188,7 +188,6 @@ routebox>.routetitle {
 }
 
 linebox {
-    background-color: rgb(107, 0, 107);
     color: white;
     height: fit-content;
     text-align: center;
@@ -228,7 +227,6 @@ leftbox {
 
 .traintitle {
     font-size: 11pt;
-    background-color: rgb(80, 0, 80);
     color: white;
     width: fit-content;
     padding: 0.2vh 0.2vw 0 0.2vw;
